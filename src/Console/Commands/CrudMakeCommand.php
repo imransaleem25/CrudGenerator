@@ -80,5 +80,9 @@ class CrudMakeCommand extends Command
             $stat->records_count = DB::table($table)->count();
             $stat->save();
         }
+
+        $file = base_path('routes/web.php');
+        $route = "Route::resource('" . strtolower($modelName) . "', App\\Http\\Controllers\\" . $modelName . "Controller::class);\n";
+        file_put_contents($file, $route, FILE_APPEND);
     }
 }

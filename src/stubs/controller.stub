@@ -1,42 +1,76 @@
 <?php
 
-namespace DummyNamespace\Http\Controllers;
+namespace DummyNamespace;
 
-use App\Http\Controllers\Controller;
-use DummyNamespace\Services\DummyClassService;
+use DummyRootNamespaceModels\DummyModel;
 use Illuminate\Http\Request;
 
-class DummyClassController extends Controller
+class DummyClass extends Controller
 {
-    protected DummyClassService $service;
-
-    public function __construct(DummyClassService $service)
-    {
-        $this->service = $service;
-    }
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return response()->json($this->service->all());
+        $items = DummyModel::all();
+        return view('DummyViewFolder.index', compact('items'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('DummyViewFolder.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        return response()->json($this->service->create($request->all()));
+        $validated = $request->validate([
+            // Add your validation rules here
+            // 'name' => 'required|string|max:255',
+        ]);
+
+        DummyModel::create($validated);
+
+        return redirect()->route('DummyRouteName.index')
+            ->with('success', 'Record created successfully.');
     }
 
-    public function show($id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(DummyModel $item)
     {
-        return response()->json($this->service->find($id));
+        return view('DummyViewFolder.edit', compact('item'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, DummyModel $item)
     {
-        return response()->json($this->service->update($id, $request->all()));
+        $validated = $request->validate([
+            // Add your validation rules here
+        ]);
+
+        $item->update($validated);
+
+        return redirect()->route('DummyRouteName.index')
+            ->with('success', 'Record updated successfully.');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(DummyModel $item)
     {
-        return response()->json($this->service->delete($id));
+        $item->delete();
+
+        return redirect()->route('DummyRouteName.index')
+            ->with('success', 'Record deleted successfully.');
     }
 }

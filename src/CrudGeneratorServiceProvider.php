@@ -15,7 +15,11 @@ class  CrudGeneratorServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+        // Load package routes
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        $this->loadViewsFrom(__DIR__ . '/stubs/views', 'crud-generator');
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         if ($this->app->runningInConsole()) {
             $this->commands([
