@@ -1,0 +1,20 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>Edit {{ ucfirst($name) }}</h1>
+    <form method="POST" action="{{ route('{{name}}.update', $item->id) }}">
+        @csrf
+        @method('PUT')
+        @foreach($fields as $field)
+        <div class="mb-3">
+            <label class="form-label">{{ ucfirst($field) }}</label>
+            <input type="text" name="{{ $field }}" class="form-control" value="{{ old($field, $item->$field) }}">
+            @error($field) <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+        @endforeach
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('{{name}}.index') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+@endsection

@@ -1,0 +1,15 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>View {{ ucfirst($name) }}</h1>
+    <div class="card">
+        <div class="card-body">
+            @foreach($fields as $field)
+            <p><strong>{{ ucfirst($field) }}:</strong> {{ $item->$field }}</p>
+            @endforeach
+        </div>
+    </div>
+    <a href="{{ route('{{name}}.index') }}" class="btn btn-secondary mt-3">Back</a>
+</div>
+@endsection

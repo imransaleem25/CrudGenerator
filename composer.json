@@ -1,0 +1,36 @@
+{
+    "name": "imransaleem/crud-generator",
+    "description": "A Laravel package to generate CRUD operations using the Service-Repository pattern with Bootstrap 5 views.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Imran Saleem",
+            "email": "imran.saleem2425@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Imransaleem\\CrudGenerator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Imransaleem\\CrudGenerator\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Imransaleem\\CrudGenerator\\CrudGeneratorServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+

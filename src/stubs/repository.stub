@@ -1,0 +1,14 @@
+<?php
+
+namespace DummyNamespace\Repositories;
+
+use Imransaleem\CrudGenerator\Repositories\BaseRepository;
+use DummyFullModelClass;
+
+class DummyClassRepository extends BaseRepository
+{
+    public function __construct(DummyClass $model)
+    {
+        parent::__construct($model);
+    }
+}

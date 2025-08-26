@@ -1,0 +1,14 @@
+<?php
+
+namespace DummyNamespace\Services;
+
+use Imransaleem\CrudGenerator\Services\BaseService;
+use DummyNamespace\Repositories\DummyClassRepository;
+
+class DummyClassService extends BaseService
+{
+    public function __construct(DummyClassRepository $repository)
+    {
+        parent::__construct($repository);
+    }
+}

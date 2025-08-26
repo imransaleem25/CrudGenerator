@@ -1,0 +1,40 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>{{ ucfirst($namePlural) }}</h1>
+    <a href="{{ route('{{name}}.create') }}" class="btn btn-primary mb-3">Add New</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                @foreach($fields as $field)
+                    <th>{{ ucfirst($field) }}</th>
+                @endforeach
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($items as $item)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                @foreach($fields as $field)
+                    <td>{{ $item->$field }}</td>
+                @endforeach
+                <td>
+                    <a href="{{ route('{{name}}.show', $item->id) }}" class="btn btn-sm btn-info">View</a>
+                    <a href="{{ route('{{name}}.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ route('{{name}}.destroy', $item->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button onclick="return confirm('Delete this record?')" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @empty
+                <tr><td colspan="99" class="text-center">No records found</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+@endsection
